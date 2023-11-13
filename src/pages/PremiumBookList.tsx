@@ -39,7 +39,7 @@ const PremiumBookList = ({ books }: PremiumBookListProps) => {
                     </Center>
 
                     {/* ToDo: link ke page add book collection */}
-                    <Link href="/book/add" color="blue.500" mb={4}>
+                    <Link href="/collection" color="blue.500" mb={4}>
                         Check Collection
                     </Link>
                     <Table variant="striped" colorScheme="blue" size="md" borderWidth="1px" borderColor="gray.200">

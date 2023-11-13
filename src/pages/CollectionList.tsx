@@ -42,7 +42,7 @@ const CollectionList = ({ books }: CollectionListProps) => {
                     </Center>
 
                     {/* ToDo: link ke page add book collection */}
-                    <Link href="/book/add" color="blue.500" mb={4}>
+                    <Link href="/premium-book" color="blue.500" mb={4}>
                         + Add Collection
                     </Link>
                     <Table variant="striped" colorScheme="blue" size="md" borderWidth="1px" borderColor="gray.200">

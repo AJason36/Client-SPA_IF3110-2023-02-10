@@ -39,7 +39,7 @@ const MyBookList = ({ books }: BookListProps) => {
           </Center>
 
           {/* Todo: semua link */}
-          <Link href="/book/add" color="blue.500" mb={4}>
+          <Link href="/add" color="blue.500" mb={4}>
             + Add Book
           </Link>
           <Table variant="striped" colorScheme="blue" size="md" borderWidth="1px" borderColor="gray.200">
