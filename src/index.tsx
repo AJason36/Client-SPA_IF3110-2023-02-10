@@ -12,7 +12,7 @@ const theme: ThemeConfig = extendTheme({
   fonts: {
     body: `'Poppins', sans-serif`,
   },
-  initialColorMode: 'dark',
+  initialColorMode: 'light',
   useSystemColorMode: false,
 })
 
