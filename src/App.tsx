@@ -47,15 +47,15 @@ interface BookPremium {
 }
 
 const sampleBooks: Book[] = [
-  { book_id: 1, name: 'Action' },
-  { book_id: 2, name: 'Drama' },
-  { book_id: 3, name: 'Comedy' },
+  { book_id: 1, name: 'Laskar Pelangi' },
+  { book_id: 2, name: 'The Lord Of The Rings' },
+  { book_id: 3, name: 'Harry Potter' },
 ];
 
 const premiumBooks: BookPremium[] = [
-  { book_id: 1, name: 'Action',author:'John Doe' },
-  { book_id: 2, name: 'Drama',author:'John Doe' },
-  { book_id: 3, name: 'Comedy',author:'John Doe' },
+  { book_id: 1, name: 'Laskar Pelangi',author:'John Doe' },
+  { book_id: 2, name: 'The Lord Of The Rings',author:'John Doe' },
+  { book_id: 3, name: 'Harry Potter',author:'John Doe' },
 ];
 
 // Sample Data for User-related components
