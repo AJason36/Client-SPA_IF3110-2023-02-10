@@ -8,8 +8,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-    background-color: white;
-    color: black
+    background-color: "transparent";
 }
 
 @media screen and (max-width: 400px) {
