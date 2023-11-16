@@ -63,8 +63,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       duration: 3000,
       isClosable: true,
     });
-    navigate("/");
-  }
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);  }
   return (
     <Flex
       px={{ base: 4, md: 4 }}
