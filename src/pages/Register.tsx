@@ -226,7 +226,7 @@ const RegisterPage: React.FC = () => {
                                     border: "2px",
                                 }}
                                 onClick={handleRegister}
-                                disabled={isDisabled}
+                                isDisabled={isDisabled}
                             >
                                 Register
                             </Button>
