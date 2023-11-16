@@ -24,6 +24,7 @@ import {
 import { ReactNode } from "react";
 import { IconType } from "react-icons";
 import { useNavigate } from "react-router-dom";
+import {getRole, getUsername, logout} from "../utils/auth";
 
 interface LinkItemProps {
   name: string;
@@ -50,6 +51,20 @@ interface MobileProps extends FlexProps {
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const userName = getUsername();
+  const role = getRole().toString();
+  const navigate = useNavigate();
+  const toast = useToast();
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Logged out successfully!",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+    navigate("/");
+  }
   return (
     <Flex
       px={{ base: 4, md: 4 }}
@@ -75,9 +90,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   ml="2"
                   background={"transparent"}
                 >
-                  <Text color="white" fontSize="sm" background={"transparent"}>Hello, Jason</Text>
+                  <Text color="white" fontSize="sm" background={"transparent"}>Hello, {userName}</Text>
                   <Text color="white" fontSize="xs" background={"#353940"} px={2} borderRadius="8px">
-                    Author
+                    {role}
                   </Text>
                 </VStack>
               </HStack>
@@ -93,6 +108,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           }}
           bg={"#D71414"}
           borderColor={"transparent"}
+          onClick={handleLogout}
         >
           Log Out
         </Button>
