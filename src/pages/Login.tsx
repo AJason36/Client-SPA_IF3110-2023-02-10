@@ -59,7 +59,7 @@ const LoginPage: React.FC = () => {
                 setAuthToken(response.data.accessToken);
                 const payload: Payload = getAuthData();
                 if (payload.role.toString() === "author") {
-                    navigate("/premium-book");
+                    navigate("/my-book");
                 } else {
                     navigate("/collection");
                 }
@@ -158,7 +158,7 @@ const LoginPage: React.FC = () => {
                                     border: "2px",
                                 }}
                                 onClick={handleLogin}
-                                disabled={isDisabled}
+                                isDisabled={isDisabled}
                             >
                                 Log In
                             </Button>
