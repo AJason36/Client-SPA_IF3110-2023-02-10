@@ -17,7 +17,6 @@ function getAuthData(): Payload {
     const decoded: Payload = jwtDecode(tokentest!);
     return decoded;
   } catch (err) {
-    console.log(err)
     return {
       username: "",
       email: "",
