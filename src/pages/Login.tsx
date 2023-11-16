@@ -8,11 +8,93 @@ import {
     Text,
     Button,
     Link,
+    useToast
 } from '@chakra-ui/react';
 import logo from "../assets/logo_colored.png";
-
+import { useEffect, useState } from "react";
+import { axiosInstance } from "../utils/axios";
+import { Axios, AxiosError } from "axios";
+import { useNavigate, Link as RouterLink, ErrorResponse } from "react-router-dom";
+import { setAuthToken, getAuthData, Payload } from "../utils/auth";
 
 const LoginPage: React.FC = () => {
+    const toast = useToast();
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [isDisabled, setIsDisabled] = useState(true);
+    const navigate = useNavigate();
+
+    const handleChangeUsername: React.ChangeEventHandler<HTMLInputElement> = (e) => { 
+        setUsername(e.target.value);
+    }
+
+    const handleChangePassword: React.ChangeEventHandler<HTMLInputElement> = (e) => { 
+        setPassword(e.target.value);
+    }
+
+    const disableWhenEmpty = () => {
+        if (username === "" || password === "") {
+            setIsDisabled(true);
+        }
+        setIsDisabled(false);
+    }
+    useEffect(() => { 
+        disableWhenEmpty();
+    }, [username, password]);
+    
+    const handleLogin = async () => {
+        try {
+            const response = await axiosInstance.post("/login", {
+                username: username.toLowerCase(),
+                password: password,
+            });
+            if (response.status == 200) {
+                toast({
+                    title: "Login successful",
+                    description: response.data.message,
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                })
+                setAuthToken(response.data.accessToken);
+                const payload: Payload = getAuthData();
+                if (payload.role.toString() === "author") {
+                    navigate("/premium-book");
+                } else {
+                    navigate("/collection");
+                }
+            } else {
+                toast({
+                    title: "Login failed.",
+                    description: response.data.message,
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                });
+            }
+        } catch (error) {
+            const err = error as AxiosError;
+            const errorMessage = (err.response?.data as any)?.error;
+            if (err.response?.status === 401) {
+                toast({
+                    title: "Invalid Credentials",
+                    description: "Please check your username and password.",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                });
+            } else {
+                toast({
+                    title: "An error occurred.",
+                    description: errorMessage,
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                });
+            }
+        }
+    }
+
     return (
         <>
             <Center>
@@ -42,7 +124,8 @@ const LoginPage: React.FC = () => {
                                 placeholder="e.g. moonawar19"
                                 required
                                 className="form-field"
-                                mb={2}
+                                    mb={2}
+                                    onChange={handleChangeUsername}
                                 />
                             </FormControl>
 
@@ -58,6 +141,7 @@ const LoginPage: React.FC = () => {
                                 required
                                 className="form-field"
                                 mb={2}
+                                onChange={handleChangePassword}
                                 />
                             </FormControl>
                             
@@ -73,8 +157,10 @@ const LoginPage: React.FC = () => {
                                     borderColor: "teal",
                                     border: "2px",
                                 }}
+                                onClick={handleLogin}
+                                disabled={isDisabled}
                             >
-                                Sign In
+                                Log In
                             </Button>
                             <Center>
                                 <Text>
