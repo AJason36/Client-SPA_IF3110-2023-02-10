@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import {
-    Box,
     Heading,
     Table,
     Thead,
@@ -13,12 +12,11 @@ import {
     Button,
     Center,
     useToast,
-    Text
 } from '@chakra-ui/react';
 import Navbar from '../components/Navbar';
 import { axiosConfig } from "../utils/axios";
 import { getUsername } from "../utils/auth";
-import { Router, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import config from "../config/config";
 import axios from "axios";
 
@@ -85,13 +83,15 @@ const CollectionList = () => {
                     flexDirection={"column"}
                 >
                     <Center>
-                        {/* Todo: 'MY' diganti nama */}
-                        <Heading mb={4}>My Premium Collection</Heading>
+                        <Heading mb={4}>{username}'s Premium Collection</Heading>
                     </Center>
 
                     {/* ToDo: link ke page add book collection */}
                     <Link href="/premium-book" color="blue.500" mb={4}>
                         + Add Collection
+                    </Link>
+                    <Link href="/subs-request" color="blue.500" mb={4}>
+                        Check Subscription Request
                     </Link>
                     <Table variant="striped" colorScheme="blue" size="md" borderWidth="1px" borderColor="gray.200">
                         <Thead>

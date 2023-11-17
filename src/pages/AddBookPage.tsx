@@ -14,14 +14,12 @@ import {
   Link
 } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { axiosConfig } from "../utils/axios";
 import { getUsername } from "../utils/auth";
 import axios from "axios";
-import config from "../config/config";
 
 const AddBookPage: FunctionComponent = () => {
-  const [input, setInput] = useState('')
   const [title, setTitle] = useState('');
   const [year, setYear] = useState<Number>(0);
   const [detail, setDetail] = useState('');
@@ -46,8 +44,8 @@ const AddBookPage: FunctionComponent = () => {
   const handleChangeDuration: React.ChangeEventHandler<HTMLInputElement> = (e) => { 
     setDuration(Number(e.target.value));
   }
-  const handleChangeAudio: React.ChangeEventHandler<HTMLInputElement> = (e) => { 
-    setAudio(e.target.files![0]);
+  const handleChangeAudio: React.ChangeEventHandler<HTMLInputElement> = (e:React.ChangeEvent<HTMLInputElement>) => { 
+    setAudio(e.target.files?.item(0));
   }
 
   const validate = () => {
@@ -112,7 +110,7 @@ const AddBookPage: FunctionComponent = () => {
     if (validate()) {
       // TODO: fix audio path
       // const formData = new FormData();
-      // formData.append('audio', audio!);
+      // formData.append('file', audio as File);
       // formData.append('title', title);
       // formData.append('genre', genre);
       // formData.append('year', year.toString());
@@ -121,9 +119,7 @@ const AddBookPage: FunctionComponent = () => {
       // formData.append('createdBy', username);
       // console.log(formData);
       try {
-        // const response = await newAxiosInstance.post("/premium", {
-        //   formData
-        // });
+        // const response = await newAxiosInstance.post("/premium",formData);
         const response = await newAxiosInstance.post("/premium", {
           title: title,
           genre: genre,
@@ -163,7 +159,6 @@ const AddBookPage: FunctionComponent = () => {
 
   const navigate = useNavigate();
 
-  const isError = input === ''
   return (
     <>
       <Navbar children={undefined} />
