@@ -76,7 +76,7 @@ const EditBookPage: FunctionComponent = () => {
     }
 
     useEffect(() => {
-        axiosInstance.get(`${config.REST_API_URL}/premium/${book_id}`).then((res) => {
+        axiosInstance.get(`${config.REST_API_URL}/premium-details/${book_id}`).then((res) => {
             const bookData: PremiumBook = {
                 title: res.data.book.title,
                 genre: res.data.book.genre,
