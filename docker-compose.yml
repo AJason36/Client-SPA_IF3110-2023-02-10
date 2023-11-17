@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  client-spa_if3110-2023-02-10:
+    container_name: client-spa
+    ports:
+      - "3000:3000"
+    build:
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    command: ["npm", "start"]
